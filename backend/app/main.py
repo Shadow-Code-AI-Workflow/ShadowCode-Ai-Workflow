@@ -51,6 +51,4 @@ async def analyze_code(request: CodeAnalysisRequest):
         request.code
     )
 
-    return {
-        "analysis": analysis
-    }
+    return analysis
