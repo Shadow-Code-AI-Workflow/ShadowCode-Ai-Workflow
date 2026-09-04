@@ -14,6 +14,24 @@ app = FastAPI(
 class ChatRequest(BaseModel):
     message: str
 
+class CodeAnalysisRequest(BaseModel):
+    code: str
+
+class Vulnerability(BaseModel):
+    name: str
+    severity: str
+    description: str
+    evidence: str
+    impact: str
+    remediation: str
+    confidence: str
+
+
+class SecurityAnalysis(BaseModel):
+    vulnerabilities: list[Vulnerability]
+
+class AnalysisResponse(BaseModel):
+    analysis: SecurityAnalysis
 
 @app.get("/")
 def root():
@@ -40,4 +58,18 @@ async def chat(request: ChatRequest):
 
     return {
         "response": response
+    }
+
+@app.post("/analyze", response_model=AnalysisResponse)
+async def analyze_code(request: CodeAnalysisRequest):
+    from app.services.security_agent import SecurityAgent
+
+    agent = SecurityAgent()
+
+    analysis = await agent.analyze_code(
+        request.code
+    )
+
+    return {
+        "analysis": analysis
     }
