@@ -87,5 +87,4 @@ Return ONLY valid JSON using the required structure.
             return {
                 "vulnerabilities": [],
                 "error": "LLM returned invalid JSON",
-                "raw_response": response,
-            }
+    }
