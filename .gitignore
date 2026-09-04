@@ -1,2 +1,4 @@
-Shadow Code/
-Shadow Code BACKUP/
+.env
+venv/
+__pycache__/
+*.pyc
