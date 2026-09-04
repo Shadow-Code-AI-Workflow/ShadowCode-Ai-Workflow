@@ -9,6 +9,9 @@ class ChatRequest(BaseModel):
 class CodeAnalysisRequest(BaseModel):
     code: str
 
+class RepositoryAnalysisRequest(BaseModel):
+
+    repository_url: str
 
 class Vulnerability(BaseModel):
     name: str
@@ -21,4 +24,16 @@ class Vulnerability(BaseModel):
 
 
 class SecurityAnalysis(BaseModel):
+    vulnerabilities: List[Vulnerability]
+
+class RepositorySecurityAnalysis(BaseModel):
+
+    repository_url: str
+
+    files_analyzed: int
+
+    total_vulnerabilities: int
+
+    severity_summary: dict[str, int]
+
     vulnerabilities: List[Vulnerability]
